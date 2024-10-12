@@ -1,0 +1,133 @@
+{
+  "version": "1.25.3",
+  "films": [
+    {
+      "id": "deadpool_wolverine",
+      "title": "Deadpool & Wolverine",
+      "year": 2024,
+      "duration": 7620,
+      "poster": "https://cdn.kinocheck.com/i/w=1200/d3mx9y2anl.jpg",
+      "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/vh74qihcjvc/zzWPTyKzZ90t55yFb5ONjw/1728178184/vh74qihcjvc//master.m3u8"
+    },
+    {
+      "id": "john_wick",
+      "title": "John Wick",
+      "year": 2014,
+      "duration": 6060,
+      "poster": "https://cdn.kinocheck.com/i/w=1200/pvatm0owmf.jpg",
+      "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/jnmljrug6l9/UMwOfUmTWiknnKfB-lpIbA/1725396613/jnmljrug6l9//master.m3u8"
+    },
+    {
+      "id": "elvis",
+      "title": "Elvis",
+      "year": 2022,
+      "duration": 9540,
+      "poster": "https://cdn.kinocheck.com/i/j7g8i57dlw.jpg",
+      "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/42t6g8weimw/hhOzTyMWmzkPc5LTBQtCBg/1725303013/42t6g8weimw//master.m3u8"
+    },
+    {
+      "id": "harry_potter_1",
+      "title": "Harry Potter und der Stein der Weisen",
+      "year": 2001,
+      "duration": 9120,
+      "poster": "https://i.ibb.co/wMLkNfK/Screenshot-2024-10-12-085419.png",
+      "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/5uhykxfw6qv/OiGE2XFe27wTjEt0NI2BBg/1725396564/5uhykxfw6qv//master.m3u8"
+    },
+    {
+      "id": "harry_potter_2",
+      "title": "Harry Potter und die Kammer des Schreckens",
+      "year": 2002,
+      "duration": 9480,
+      "poster": "https://i.ibb.co/VLs5F5D/Screenshot-2024-10-12-085428.png",
+      "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/psloo2chu8r/WD0huoGTcOe1KQfs6xgu1g/1728719546/psloo2chu8r//master.m3u8"
+    },
+    {
+      "id": "harry_potter_3",
+      "title": "Harry Potter und der Gefangene von Askaban",
+      "year": 2004,
+      "duration": 8460,
+      "poster": "https://i.ibb.co/hVHv2vj/Screenshot-2024-10-12-085435.png",
+      "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/j5eu8b7qw5g/ZQMg8WWS6Bk0eUWrGPEkMA/1728719091/j5eu8b7qw5g//master.m3u8"
+    },
+    {
+      "id": "harry_potter_4",
+      "title": "Harry Potter und der Feuerkelch",
+      "year": 2005,
+      "duration": 9360,
+      "poster": "https://i.ibb.co/H7YL8hc/Screenshot-2024-10-12-085443.png",
+      "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/ks9diqvjvpi/Bs7riTznM_DlwesAzSon9g/1728718863/ks9diqvjvpi//master.m3u8"
+    },
+    {
+      "id": "harry_potter_5",
+      "title": "Harry Potter und der Orden des Phönix",
+      "year": 2007,
+      "duration": 8280,
+      "poster": "https://i.ibb.co/dPRzFLw/Screenshot-2024-10-12-085451.png",
+      "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/c8makyiztqj/t8EFPLvNkqKeCymVRbpRlw/1728499048/c8makyiztqj//master.m3u8"
+    },
+    {
+      "id": "harry_potter_6",
+      "title": "Harry Potter und der Halbblutprinz",
+      "year": 2009,
+      "duration": 9180,
+      "poster": "https://i.ibb.co/mvh4QqT/Screenshot-2024-10-12-085502.png",
+      "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/bgxu9d9qkcl/mJWCM2MOQ2MKkLzcGWGj5A/1728499256/bgxu9d9qkcl//master.m3u8"
+    },
+    {
+      "id": "harry_potter_7_1",
+      "title": "Harry Potter und die Heiligtümer des Todes – Teil 1",
+      "year": 2010,
+      "duration": 8760,
+      "poster": "https://i.ibb.co/8NqZGSS/Screenshot-2024-10-12-085521.png",
+      "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/kyfsdq9vz4j/HKrvaQz5uhEcKdqdVhmhzA/1728499344/kyfsdq9vz4j//master.m3u8"
+    },
+    {
+      "id": "harry_potter_7_2",
+      "title": "Harry Potter und die Heiligtümer des Todes – Teil 2",
+      "year": 2011,
+      "duration": 7260,
+      "poster": "https://i.ibb.co/RgstHcK/Screenshot-2024-10-12-085539.png",
+      "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/tmknfnpbobg/CFc5QXIIyfjlwZtKUji4tQ/1728499471/tmknfnpbobg//master.m3u8"
+    },
+    {
+      "id": "a_quiet_place_day_one",
+      "title": "A Quiet Place: Tag Eins",
+      "year": 2024,
+      "duration": 5940,
+      "poster": "https://cdn.kinocheck.com/i/w=1200/byu6b224j7.jpg",
+      "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/x71xoesgd4m/0yzOMezycVN1SGfHIvnNYw/1728050148/x71xoesgd4m//master.m3u8"
+    },
+    {
+      "id": "a_quiet_place_2",
+      "title": "A Quiet Place 2",
+      "year": 2020,
+      "duration": 5820,
+      "poster": "https://cdn.kinocheck.com/i/w=1200/sjnlbqo4z5.jpg",
+      "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/fyv99drtzr/oKHWx3qg1XA1-H_9O3m6Sg/1728219645/fyv99drtzr//master.m3u8"
+    },
+    {
+      "id": "a_quiet_place",
+      "title": "A Quiet Place",
+      "year": 2018,
+      "duration": 5400,
+      "poster": "https://cdn.kinocheck.com/i/jjttfkyc9f.jpg",
+      "streamUrl": ""
+    },
+    {
+      "id": "shes_the_man",
+      "title": "She's the Man – Voll mein Typ!",
+      "year": 2006,
+      "duration": 6300,
+      "poster": "https://i.ebayimg.com/images/g/y9wAAOSwqsxkyiHn/s-l1200.jpg",
+      "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/7xlzoj6sk8t/jVp28QMubIX694J1dZ0GNQ/1728492435/7xlzoj6sk8t//master.m3u8"
+    },
+    {
+      "id": "culpa_mia",
+      "title": "Culpa Mia – Meine Schuld",
+      "year": 2023,
+      "duration": 7020,
+      "poster": "https://cdn.kinocheck.com/i/y9tic8091g.jpg",
+      "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/73rdh0ix2tg/btApxqlyxQeqOpTl0BQi9A/1728493350/73rdh0ix2tg//master.m3u8"
+    }
+  ]
+}
