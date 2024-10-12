@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#141414">
     <title>FilmFrei</title>
     <style>
         body {
@@ -14,22 +17,33 @@
         }
         .container {
             padding: 20px;
+            padding-top: 80px; /* Space for fixed header */
         }
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
-            background-color: rgba(0,0,0,0.8);
+            background-color: rgba(20,20,20,0.8);
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
+            backdrop-filter: blur(10px);
         }
         h1 {
             margin: 0;
             font-size: 24px;
+        }
+        #searchBar {
+            flex-grow: 1;
+            margin: 0 20px;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            background-color: rgba(255,255,255,0.2);
+            color: #fff;
         }
         #settingsBtn {
             background: none;
@@ -41,7 +55,6 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
             gap: 20px;
-            padding-top: 60px;
         }
         .film-card {
             position: relative;
@@ -115,11 +128,29 @@
             padding: 10px 20px;
             cursor: pointer;
         }
+        #resumePrompt {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 2002;
+            display: none;
+        }
+        #resumePrompt button {
+            margin: 10px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>FilmFrei</h1>
+        <input type="text" id="searchBar" placeholder="Film suchen..." oninput="searchFilms()">
         <button id="settingsBtn">⚙️</button>
     </header>
     <div class="container">
@@ -129,6 +160,11 @@
         <button id="closePlayer">×</button>
         <video id="videoPlayer" controls></video>
     </div>
+    <div id="resumePrompt">
+        <p>Möchtest du dort fortfahren, wo du aufgehört hast?</p>
+        <button onclick="resumePlayback(true)">Ja</button>
+        <button onclick="resumePlayback(false)">Nein</button>
+    </div>
     <div id="settingsModal">
         <h2>Einstellungen</h2>
         <input type="text" id="catalogInput" placeholder="Katalog-URL eingeben">
@@ -137,22 +173,23 @@
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script>
         let catalog = null;
+        let currentFilm = null;
 
         async function loadCatalog(url) {
             try {
                 const response = await fetch(url);
                 catalog = await response.json();
-                renderFilms();
+                renderFilms(catalog.films);
             } catch (error) {
                 console.error('Fehler beim Laden des Katalogs:', error);
                 alert('Fehler beim Laden des Katalogs. Bitte überprüfen Sie die URL und versuchen Sie es erneut.');
             }
         }
 
-        function renderFilms() {
+        function renderFilms(films) {
             const filmGrid = document.getElementById('filmGrid');
             filmGrid.innerHTML = '';
-            catalog.films.forEach(film => {
+            films.forEach(film => {
                 const card = document.createElement('div');
                 card.className = 'film-card';
                 card.innerHTML = `
@@ -167,17 +204,51 @@
         }
 
         function playFilm(film) {
+            currentFilm = film;
+            const player = document.getElementById('player');
+            const video = document.getElementById('videoPlayer');
+            const savedTime = localStorage.getItem(`filmProgress_${film.id}`);
+
+            if (savedTime) {
+                document.getElementById('resumePrompt').style.display = 'block';
+            } else {
+                startPlayback();
+            }
+        }
+
+        function resumePlayback(resume) {
+            document.getElementById('resumePrompt').style.display = 'none';
+            startPlayback(resume);
+        }
+
+        function startPlayback(resume = false) {
             const player = document.getElementById('player');
             const video = document.getElementById('videoPlayer');
             player.style.display = 'block';
+
             if (Hls.isSupported()) {
                 const hls = new Hls();
-                hls.loadSource(film.streamUrl);
+                hls.loadSource(currentFilm.streamUrl);
                 hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    if (resume) {
+                        const savedTime = localStorage.getItem(`filmProgress_${currentFilm.id}`);
+                        video.currentTime = savedTime ? parseFloat(savedTime) : 0;
+                    }
+                    video.play();
+                });
             } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = film.streamUrl;
+                video.src = currentFilm.streamUrl;
+                if (resume) {
+                    const savedTime = localStorage.getItem(`filmProgress_${currentFilm.id}`);
+                    video.currentTime = savedTime ? parseFloat(savedTime) : 0;
+                }
+                video.play();
             }
-            video.play();
+
+            video.addEventListener('timeupdate', function() {
+                localStorage.setItem(`filmProgress_${currentFilm.id}`, video.currentTime);
+            });
         }
 
         document.getElementById('closePlayer').addEventListener('click', () => {
@@ -186,6 +257,7 @@
             player.style.display = 'none';
             video.pause();
             video.src = '';
+            currentFilm = null;
         });
 
         document.getElementById('settingsBtn').addEventListener('click', () => {
@@ -201,11 +273,26 @@
             }
         });
 
+        function searchFilms() {
+            const searchTerm = document.getElementById('searchBar').value.toLowerCase();
+            const filteredFilms = catalog.films.filter(film => 
+                film.title.toLowerCase().includes(searchTerm)
+            );
+            renderFilms(filteredFilms);
+        }
+
         // Beim Start der App
         const savedCatalogUrl = localStorage.getItem('catalogUrl');
         if (savedCatalogUrl) {
             loadCatalog(savedCatalogUrl);
         }
+
+        // Verhindern des Pull-to-Refresh auf iOS
+        document.body.addEventListener('touchmove', function(e) {
+            if (e.target.nodeName !== 'VIDEO') {
+                e.preventDefault();
+            }
+        }, { passive: false });
     </script>
 </body>
 </html>
