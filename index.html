@@ -2,264 +2,235 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#141414">
-    <title>FilmFrei</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video-Player mit HLS Unterstützung</title>
     <style>
-        /* CSS-Stile bleiben unverändert */
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #141414;
-            color: #fff;
-            height: 100vh;
-            overflow: hidden;
+            background-color: #f4f4f4;
         }
-        /* ... [Rest der CSS-Stile] ... */
+        #player {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+        #videoContainer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 1000px;
+        }
+        #videoPlayer {
+            width: 100%;
+            border-radius: 10px;
+            background-color: #000;
+        }
+        #closePlayer {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
+        #resumePrompt {
+            display: none;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+        .film-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+            padding: 10px;
+        }
+        .film-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .film-info h3 {
+            font-size: 1.2rem;
+            margin: 0;
+        }
+        @media (max-width: 600px) {
+            #searchBar {
+                width: 100%;
+            }
+            .film-info h3 {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>FilmFrei</h1>
-        <input type="text" id="searchBar" placeholder="Film suchen...">
-        <button id="settingsBtn"><i class="fas fa-cog"></i></button>
-    </header>
-    <div class="container">
-        <div id="pullToRefresh">
-            <i class="fas fa-sync"></i> Zum Aktualisieren nach unten ziehen
-        </div>
-        <div class="film-grid" id="filmGrid"></div>
-    </div>
-    <div id="player">
-        <button id="closePlayer"><i class="fas fa-times"></i></button>
+
+<!-- Video-Player Modal -->
+<div id="player">
+    <div id="videoContainer">
         <video id="videoPlayer" controls></video>
-    </div>
-    <div id="resumePrompt">
-        <p>Möchtest du dort fortfahren, wo du aufgehört hast?</p>
-        <button onclick="resumePlayback(true)">Ja</button>
-        <button onclick="resumePlayback(false)">Nein</button>
-    </div>
-    <div id="settingsModal">
-        <h2>Einstellungen</h2>
-        <input type="text" id="catalogInput" placeholder="Katalog-URL eingeben">
-        <button id="saveCatalog">Speichern</button>
-        <div id="currentCatalog"></div>
-    </div>
-
-    <div id="tawk-chat" class="minimized">
-        <div id="tawk-chat-header">
-            <span>Chat Support</span>
-            <button id="tawk-chat-toggle"><i class="fas fa-comments"></i></button>
+        <div id="closePlayer">✖</div>
+        <div id="resumePrompt">
+            <p>Wiedergabe fortsetzen?</p>
+            <button onclick="startPlayback()">Ja</button>
+            <button onclick="resetPlayback()">Nein</button>
         </div>
-        <div id="tawk-chat-content"></div>
     </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script>
-        let catalog = null;
-        let currentFilm = null;
-        let startY = 0;
-        let pullDistance = 0;
-        const container = document.querySelector('.container');
+<!-- Suchleiste -->
+<input type="text" id="searchBar" onkeyup="searchFilms()" placeholder="Film suchen..." />
 
-        async function loadCatalog(url) {
-            try {
-                const response = await fetch(url);
-                catalog = await response.json();
-                renderFilms(catalog.films);
-                document.getElementById('currentCatalog').textContent = `Aktueller Katalog: ${url}`;
-            } catch (error) {
-                console.error('Fehler beim Laden des Katalogs:', error);
-                alert('Fehler beim Laden des Katalogs. Bitte überprüfen Sie die URL und versuchen Sie es erneut.');
-            }
-        }
+<!-- Film-Grid -->
+<div class="film-grid" id="filmGrid">
+    <!-- Dynamisch eingefügte Filmkarten -->
+</div>
 
-        function renderFilms(films) {
-            const filmGrid = document.getElementById('filmGrid');
-            filmGrid.innerHTML = '';
-            films.forEach(film => {
-                const card = document.createElement('div');
-                card.className = 'film-card';
-                card.innerHTML = `
-                    <img src="${film.poster}" alt="${film.title}">
-                    <div class="film-info">
-                        <h3 class="film-title">${film.title}</h3>
-                    </div>
-                `;
-                card.addEventListener('click', () => playFilm(film));
-                filmGrid.appendChild(card);
-            });
-        }
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script>
+    let currentFilm = null;
+    let hls = new Hls();
+    let catalog = {
+        films: [
+            { id: 1, title: 'Film 1', url: 'https://path/to/film1.m3u8', poster: 'poster1.jpg' },
+            { id: 2, title: 'Film 2', url: 'https://path/to/film2.m3u8', poster: 'poster2.jpg' },
+            // Weitere Filme...
+        ]
+    };
 
-        function playFilm(film) {
-            currentFilm = film;
-            const player = document.getElementById('player');
-            const video = document.getElementById('videoPlayer');
-            const savedTime = localStorage.getItem(`filmProgress_${film.id}`);
-
-            if (savedTime) {
-                document.getElementById('resumePrompt').style.display = 'block';
-            } else {
-                startPlayback();
-            }
-        }
-
-        function resumePlayback(resume) {
-            document.getElementById('resumePrompt').style.display = 'none';
-            startPlayback(resume);
-        }
-
-        function startPlayback(resume = false) {
-            const player = document.getElementById('player');
-            const video = document.getElementById('videoPlayer');
-            player.style.display = 'block';
-
-            if (Hls.isSupported()) {
-                const hls = new Hls();
-                hls.loadSource(currentFilm.streamUrl);
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, function() {
-                    if (resume) {
-                        const savedTime = localStorage.getItem(`filmProgress_${currentFilm.id}`);
-                        video.currentTime = savedTime ? parseFloat(savedTime) : 0;
-                    }
-                    video.play();
-                });
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                video.src = currentFilm.streamUrl;
-                if (resume) {
-                    const savedTime = localStorage.getItem(`filmProgress_${currentFilm.id}`);
-                    video.currentTime = savedTime ? parseFloat(savedTime) : 0;
-                }
-                video.play();
-            }
-
-            video.addEventListener('timeupdate', function() {
-                localStorage.setItem(`filmProgress_${currentFilm.id}`, video.currentTime);
-            });
-        }
-
-        document.getElementById('closePlayer').addEventListener('click', () => {
-            const player = document.getElementById('player');
-            const video = document.getElementById('videoPlayer');
-            player.style.display = 'none';
-            video.pause();
-            video.src = '';
-            currentFilm = null;
+    // Filme in Grid rendern
+    function renderFilms(films) {
+        const filmGrid = document.getElementById('filmGrid');
+        filmGrid.innerHTML = '';
+        films.forEach(film => {
+            const filmCard = document.createElement('div');
+            filmCard.classList.add('film-card');
+            filmCard.innerHTML = `
+                <img src="${film.poster}" alt="${film.title}">
+                <div class="film-info">
+                    <h3>${film.title}</h3>
+                    <button onclick="playFilm(${film.id})">Abspielen</button>
+                </div>
+            `;
+            filmGrid.appendChild(filmCard);
         });
+    }
 
-        document.getElementById('settingsBtn').addEventListener('click', () => {
-            document.getElementById('settingsModal').style.display = 'block';
-        });
+    // Initialisiere den Katalog
+    renderFilms(catalog.films);
 
-        document.getElementById('saveCatalog').addEventListener('click', () => {
-            const catalogUrl = document.getElementById('catalogInput').value;
-            if (catalogUrl) {
-                localStorage.setItem('catalogUrl', catalogUrl);
-                loadCatalog(catalogUrl);
-                document.getElementById('settingsModal').style.display = 'none';
-            }
-        });
+    // Film abspielen
+    function playFilm(filmId) {
+        currentFilm = catalog.films.find(film => film.id === filmId);
+        const video = document.getElementById('videoPlayer');
+        const savedTime = localStorage.getItem(`filmProgress_${currentFilm.id}`);
 
-        document.getElementById('searchBar').addEventListener('input', searchFilms);
+        document.getElementById('player').style.display = 'block';
 
-        function searchFilms() {
-            const searchTerm = document.getElementById('searchBar').value.toLowerCase();
-            const filteredFilms = catalog.films.filter(film => 
-                film.title.toLowerCase().includes(searchTerm)
-            );
-            renderFilms(filteredFilms);
+        if (savedTime) {
+            document.getElementById('resumePrompt').style.display = 'block';
+        } else {
+            startPlayback();
         }
+    }
 
-        // Pull-to-Refresh Funktionalität
-        container.addEventListener('touchstart', (e) => {
-            startY = e.touches[0].pageY;
-            pullDistance = 0;
-        });
+    // Wiedergabe fortsetzen oder von vorne beginnen
+    function startPlayback() {
+        const video = document.getElementById('videoPlayer');
+        if (Hls.isSupported()) {
+            hls.loadSource(currentFilm.url);
+            hls.attachMedia(video);
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = currentFilm.url;
+        }
+        const savedTime = localStorage.getItem(`filmProgress_${currentFilm.id}`);
+        if (savedTime) {
+            video.currentTime = savedTime;
+        }
+        video.play();
+        document.getElementById('resumePrompt').style.display = 'none';
+    }
 
-        container.addEventListener('touchmove', (e) => {
-            const y = e.touches[0].pageY;
-            pullDistance = y - startY;
-            if (container.scrollTop === 0 && pullDistance > 0 && pullDistance < 90) {
+    function resetPlayback() {
+        const video = document.getElementById('videoPlayer');
+        localStorage.removeItem(`filmProgress_${currentFilm.id}`);
+        startPlayback();
+    }
+
+    // Fortschritt speichern
+    document.getElementById('videoPlayer').addEventListener('timeupdate', () => {
+        const video = document.getElementById('videoPlayer');
+        localStorage.setItem(`filmProgress_${currentFilm.id}`, video.currentTime);
+    });
+
+    // Player schließen
+    document.getElementById('closePlayer').addEventListener('click', () => {
+        const player = document.getElementById('player');
+        const video = document.getElementById('videoPlayer');
+        if (Hls.isSupported()) {
+            hls.detachMedia();
+            hls.destroy(); // HLS-Stream stoppen
+        }
+        player.style.display = 'none';
+        video.pause();
+        video.src = '';
+        currentFilm = null;
+    });
+
+    // Filme durchsuchen
+    function searchFilms() {
+        if (!catalog || !catalog.films) return;
+        const searchTerm = document.getElementById('searchBar').value.toLowerCase();
+        const filteredFilms = catalog.films.filter(film => 
+            film.title.toLowerCase().includes(searchTerm)
+        );
+        renderFilms(filteredFilms);
+    }
+
+    // Pull-to-Refresh Animation
+    const container = document.body;
+    let pullDistance = 0;
+
+    container.addEventListener('touchmove', (e) => {
+        if (container.scrollTop === 0) {
+            pullDistance = e.touches[0].clientY;
+            if (pullDistance > 60) {
+                document.getElementById('pullToRefresh').style.marginTop = '0';
                 document.body.classList.add('refreshing');
-                document.getElementById('pullToRefresh').style.marginTop = `${pullDistance - 40}px`;
-                e.preventDefault();
-            }
-        });
-
-        container.addEventListener('touchend', () => {
-            if (pullDistance > 60 && container.scrollTop === 0) {
-                refreshCatalog();
-            }
-            document.body.classList.remove('refreshing');
-            document.getElementById('pullToRefresh').style.marginTop = '-40px';
-        });
-
-        async function refreshCatalog() {
-            const catalogUrl = localStorage.getItem('catalogUrl');
-            if (catalogUrl) {
-                await loadCatalog(catalogUrl);
             }
         }
+    });
 
-        // Beim Start der App
-        const savedCatalogUrl = localStorage.getItem('catalogUrl');
-        if (savedCatalogUrl) {
-            loadCatalog(savedCatalogUrl);
-            document.getElementById('catalogInput').value = savedCatalogUrl;
-            document.getElementById('currentCatalog').textContent = `Aktueller Katalog: ${savedCatalogUrl}`;
+    container.addEventListener('touchend', () => {
+        if (pullDistance > 60 && container.scrollTop === 0) {
+            refreshCatalog();
         }
+        document.body.classList.remove('refreshing');
+        document.getElementById('pullToRefresh').style.transition = 'margin-top 0.3s ease';
+        document.getElementById('pullToRefresh').style.marginTop = '-40px';
+    });
 
-        // Schließen des Einstellungsmodals beim Klicken außerhalb
-        document.getElementById('settingsModal').addEventListener('click', (event) => {
-            if (event.target === document.getElementById('settingsModal')) {
-                document.getElementById('settingsModal').style.display = 'none';
-            }
-        });
+    function refreshCatalog() {
+        // Logik zum Katalog-Aktualisieren
+    }
 
-        // Tawk.to Chat Funktionalität
-        const tawkChat = document.getElementById('tawk-chat');
-        const tawkToggle = document.getElementById('tawk-chat-toggle');
-
-        tawkToggle.addEventListener('click', () => {
-            tawkChat.classList.toggle('minimized');
-        });
-
-        // Tawk.to Skript
-        var Tawk_API = Tawk_API || {};
-        var Tawk_LoadStart = new Date();
-        (function(){
-            var s1 = document.createElement("script"),
-                s0 = document.getElementsByTagName("script")[0];
-            s1.async = true;
-            s1.src = 'https://embed.tawk.to/670bc04e2480f5b4f58cd0a5/default';
-            s1.charset = 'UTF-8';
-            s1.setAttribute('crossorigin','*');
-            s0.parentNode.insertBefore(s1,s0);
-        })();
-
-        // Anpassen des Tawk.to Chats an unsere benutzerdefinierte Oberfläche
-        Tawk_API.onLoad = function(){
-            Tawk_API.hideWidget();
-            const iframe = document.getElementById('tawk-chat-content');
-            iframe.src = Tawk_API.getWindowType();
-        };
-
-        Tawk_API.onChatMaximized = function(){
-            tawkChat.classList.remove('minimized');
-        };
-
-        Tawk_API.onChatMinimized = function(){
-            tawkChat.classList.add('minimized');
-        };
-
-        Tawk_API.onChatHidden = function(){
-            tawkChat.classList.add('minimized');
-        };
-    </script>
+</script>
 </body>
 </html>
