@@ -2,6 +2,14 @@
   "version": "1.25.5",
   "films": [
     {
+      "id": "Turtles All the Way Down",
+      "title": "Turtles All the Way Down",
+      "year": 2024,
+      "duration": 7620,
+      "poster": "https://www.kino-zeit.de/sites/default/files/2024-04/turtles_all_the_way_down_2024.jpg",
+      "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/e08p273d2wc/1veSGvnUb4QfEeQ0JmiURg/1728831306/e08p273d2wc//master.m3u8"
+    },
+    {
       "id": "dumbledore_fttw",
       "title": "Phantastische Tierwesen: Dumbledores Geheimnisse",
       "year": 2022,
