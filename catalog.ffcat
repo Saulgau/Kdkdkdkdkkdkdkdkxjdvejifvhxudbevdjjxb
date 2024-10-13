@@ -2,6 +2,14 @@
   "version": "1.25.5",
   "films": [
 {
+      "id": "Twisters",
+      "title": "Twisters",
+      "year": 2024,
+      "duration": 7320,
+      "poster": "https://cdn.kinocheck.com/i/ggreqpuuxs.jpg",
+      "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/b2ksim2g3ec/3a_Gvx6W9Cm-6qp75ZR95A/1728840165/b2ksim2g3ec//master.m3u8"
+},
+{
       "id": "Ich – Einfach unverbesserlich 4",
       "title": "Ich – Einfach unverbesserlich 4",
       "year": 2024,
