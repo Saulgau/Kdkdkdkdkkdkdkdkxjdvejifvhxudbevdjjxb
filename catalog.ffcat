@@ -1,6 +1,14 @@
 {
   "version": "1.25.5",
   "films": [
+{
+      "id": "Blink Twice",
+      "title": "Blink Twice",
+      "year": 2024,
+      "duration": 6120,
+      "poster": "https://cdn.kinocheck.com/i/wifrj8cvd8.jpg",
+      "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/ybkfbygd3e/oUU380YG7za79eDME2rzBg/1728839507/ybkfbygd3e//master.m3u8"
+},
     {
       "id": "Beetlejuice",
       "title": "Beetlejuice",
