@@ -2,6 +2,14 @@
   "version": "1.25.5",
   "films": [
     {
+      "id": "dumbledore_fttw",
+      "title": "Phantastische Tierwesen: Dumbledores Geheimnisse",
+      "year": 2022,
+      "duration": 7620,
+      "poster": "https://cdn.kinocheck.com/i/w=1200/3vuxt9zxso.jpg",
+      "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/qbtj8hkdf9/QfaXtFZgw2Lem_e7ZvXsiw/1728830924/qbtj8hkdf9//master.m3u8"
+    },
+    {
       "id": "deadpool_wolverine",
       "title": "Deadpool & Wolverine",
       "year": 2024,
