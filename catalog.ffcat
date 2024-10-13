@@ -2,6 +2,14 @@
   "version": "1.25.5",
   "films": [
 {
+      "id": "New Life",
+      "title": "New Life",
+      "year": 2023,
+      "duration": 5100,
+      "poster": "https://cdn.kinocheck.com/i/w=1200/myvn71sznf.jpg",
+      "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/a5wcbwk0bla/yWJvvhSU32daUnzdqtCfiQ/1728840513/a5wcbwk0bla//master.m3u8"
+},
+{
       "id": "Twisters",
       "title": "Twisters",
       "year": 2024,
