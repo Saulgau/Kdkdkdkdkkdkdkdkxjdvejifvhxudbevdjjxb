@@ -2,6 +2,14 @@
   "version": "1.25.5",
   "films": [
 {
+      "id": "Afraid",
+      "title": "Afraid",
+      "year": 2024,
+      "duration": 5040,
+      "poster": "https://cdn.kinocheck.com/i/w=1200/r0ldvdfcad.jpg",
+      "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/cpz7usf0a2g/h4sizmjL1_w7wyXvtZgsJg/1729115406/cpz7usf0a2g//master.m3u8"
+},
+{
       "id": "Speak No Evil",
       "title": "Speak No Evil",
       "year": 2024,
