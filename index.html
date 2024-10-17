@@ -40,7 +40,7 @@
             background-color: var(--background-color);
             color: var(--text-color);
             line-height: 1.6;
-            overscroll-behavior-y: none;
+            /* overscroll-behavior-y: none; wurde entfernt */
         }
         
         .container {
@@ -342,10 +342,12 @@
             loadCatalog(defaultCatalogUrl);
         });
 
-        // Prevent default touch behavior
+        // Der folgende Event Listener wurde entfernt, um Scrolling zu ermöglichen
+        /*
         document.addEventListener('touchmove', function(event) {
             event.preventDefault();
         }, { passive: false });
+        */
 
         // Reload page when returning from background on iOS
         document.addEventListener("visibilitychange", function() {
