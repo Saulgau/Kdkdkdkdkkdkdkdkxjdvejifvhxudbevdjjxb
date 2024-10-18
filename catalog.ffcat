@@ -2,6 +2,14 @@
   "version": "1.25.5",
   "films": [
 {
+  "id": "THE WASP",
+  "title": "THE WASP",
+  "year": 2024,
+  "duration": 5760,
+  "poster": "https://m.media-amazon.com/images/M/MV5BNzE1YTljYTgtNzczZi00NTAyLThkYjUtYWExZDU4ZTY5YTdlXkEyXkFqcGc@._V1_FMjpg_UY11866_.jpg",
+  "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/s6p03bf5s8m/2JAdrV0DYRwQ9pBv6KOoSA/1729228656/s6p03bf5s8m//master.m3u8"
+},
+{
       "id": "South Park: Das Ende der Fettleibigkeit",
       "title": "South Park: Das Ende der Fettleibigkeit",
       "year": 2024,
