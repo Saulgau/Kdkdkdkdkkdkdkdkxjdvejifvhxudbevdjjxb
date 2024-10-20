@@ -2,14 +2,6 @@
   "version": "1.25.5",
   "films": [
 {
-  "id": "Terrifier 2 Uncut",
-  "title": "Terrifier 2 Uncut",
-  "year": 2022,
-  "duration": 8280,
-  "poster": "https://www.uncut.at/data/poster/17268/terrifier-2_de_424.jpg",
-  "streamUrl": "https://delivery-node-o92n1eqci9twxhqi.voe-network.net/engine/download/01/08893/gcdutduiccb2_n.mp4?t=yiKFNHTotuszRUEZtXl34Fma2oWDxV7uiqk0XqzhHeo&s=1729428197&e=14400&f=44467770&node=delivery-node-o92n1eqci9twxhqi.voe-network.net&i=79.127&sp=380&asn=9080&n=GzTEiFJvQSBX1y2Xf3yy4RM1Yd4RXgV8ij5kRorVJpV4NN2i.mkv.mp4&d=1"
-},
-{
   "id": "THE WASP",
   "title": "THE WASP",
   "year": 2024,
