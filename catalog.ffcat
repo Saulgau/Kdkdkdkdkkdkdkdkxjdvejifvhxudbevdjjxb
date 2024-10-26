@@ -2,6 +2,14 @@
   "version": "1.25.5",
   "films": [
 {
+  "id": "Chantal im Märchenland",
+  "title": "Chantal im Märchenland",
+  "year": 2024,
+  "duration": 7380,
+  "poster": "https://cdn.kinocheck.com/i/w=1200/hgn5ab64x3.jpg",
+  "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/5stj4uf0d5k/6uTMWt93M3cWlQIHrBbWcw/1729919343/5stj4uf0d5k//master.m3u8"
+},
+{
   "id": "THE WASP",
   "title": "THE WASP",
   "year": 2024,
