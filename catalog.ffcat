@@ -2,6 +2,14 @@
   "version": "1.25.5",
   "films": [
 {
+  "id": "annabelle_3",
+  "title": "Annabelle 3",
+  "year": 2019,
+  "duration": 6540,
+  "poster": "https://cdn.kinocheck.com/i/fi4yco9ouh.jpg",
+  "streamUrl": "https://3jtpuy07im.swiftload.io/serve/3/obhn7aqjghl/WeuzOFku-0XWS6Zhbhmjbg/1730295295/obhn7aqjghl//master.m3u8"
+},
+{
   "id": "alien:_romulus",
   "title": "Alien: Romulus",
   "year": 2024,
