@@ -2,6 +2,14 @@
   "version": "1.25.5",
   "films": [
 {
+  "id": "hereditary:_das_vermächtnis",
+  "title": "Hereditary: Das Vermächtnis",
+  "year": 2018,
+  "duration": 7620,
+  "poster": "https://cdn.kinocheck.com/i/j5pmxin84j.jpg",
+  "streamUrl": "https://dl.streamcloud.club/files/movies/1080p/6195193358607cdfb9fad3b4.mp4"
+},
+{
   "id": "annabelle_3",
   "title": "Annabelle 3",
   "year": 2019,
