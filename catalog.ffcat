@@ -2,6 +2,14 @@
   "version": "1.25.5",
   "films": [
 {
+  "id": "furiosa:_a_mad_max_saga",
+  "title": "Furiosa: A Mad Max Saga",
+  "year": 2024,
+  "duration": 8880,
+  "poster": "https://cdn.kinocheck.com/i/ct1sxkcjzu.jpg",
+  "streamUrl": "https://hfs289.serversicuro.cc/hls/,dnzpeadp27g6qogyvbnx5kbjyrcmwwqlkha7ym2jbkeffieko35lndk7rjqq,.urlset/master.m3u8"
+},
+{
   "id": "the_union",
   "title": "The Union",
   "year": 2024,
