@@ -66,6 +66,14 @@
   "streamUrl": "https://hfs289.serversicuro.cc/hls/,dnzpesee5lg6qogyvacx5lrhykorlmj257jcowwwftkshe5dg6xsmhrupwyq,.urlset/master.m3u8"
 },
 {
+  "id": "der_mann_im_mond",
+  "title": "Der Mann im Mond",
+  "year": 1991,
+  "duration": 6000,
+  "poster": "https://cdn.moviepilot.de/files/4232410f88f988fb77797a115fd4b5de5640b4cb40186108c1c9175d3c12/copyright/25429.jpg",
+  "streamUrl": "https://hfs267.serversicuro.cc/hls/,dnzpfndo5lg6qogyvabx53rhqmvdb6yzyv3oj5g7umeric5fx5pzwilvac2a,.urlset/master.m3u8"
+},
+{
   "id": "bad_boys:_ride_or_die",
   "title": "Bad Boys: Ride or Die",
   "year": 2024,
