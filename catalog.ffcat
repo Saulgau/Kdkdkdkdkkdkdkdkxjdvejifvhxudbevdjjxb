@@ -2,6 +2,22 @@
   "version": "1.25.5",
   "films": [
 {
+  "id": "the_exorcism",
+  "title": "The Exorcism",
+  "year": 2024,
+  "duration": 5580,
+  "poster": "https://cdn.kinocheck.com/i/w=1200/7u7oi2an15.jpg",
+  "streamUrl": "https://hfs289.serversicuro.cc/hls/,dnzpfbum5lg6qogyvacx5mbwzo75cj3pjtwpe5cu76di5cacnp4kfejkwjva,.urlset/master.m3u8"
+},
+{
+  "id": "don’t_move",
+  "title": "Don’t Move",
+  "year": 2024,
+  "duration": 5520,
+  "poster": "https://cdn.kinocheck.com/i/j4pd8wjq2z.jpg",
+  "streamUrl": "https://hfs289.serversicuro.cc/hls/,dnzpesee5lg6qogyvacx5lrhykorlmj257jcowwwftkshe5dg6xsmhrupwyq,.urlset/master.m3u8"
+},
+{
   "id": "hereditary:_das_vermächtnis",
   "title": "Hereditary: Das Vermächtnis",
   "year": 2018,
@@ -64,6 +80,14 @@
       "duration": 6600,
       "poster": "https://cdn.kinocheck.com/i/fthvk8cgoz.jpg",
       "streamUrl": "https://hfs289.serversicuro.cc/hls/,dnzpfbar5hg6qogyvb5h52brt4aewwd74uzsvlr5st5k2wmudffwt6wodquq,.urlset/master.m3u8"
+},
+{
+  "id": "thor:_tag_der_entscheidung",
+  "title": "Thor: Tag der Entscheidung",
+  "year": 2017,
+  "duration": 7800,
+  "poster": "https://www.justwatch.com/images/poster/49050766/s718/Thor-Ragnarok.jpg",
+  "streamUrl": "https://hfs260.serversicuro.cc/hls/,dnzpesx23hg6qogyvalx7kjescbvu6eisfriz6uqcegl23b6bpfhpprmgzhq,.urlset/master.m3u8"
 },
 {
       "id": "Butchers - Raghorn",
