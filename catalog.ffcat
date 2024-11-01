@@ -10,6 +10,14 @@
   "streamUrl": "https://hfs289.serversicuro.cc/hls/,dnzpfbum5lg6qogyvacx5mbwzo75cj3pjtwpe5cu76di5cacnp4kfejkwjva,.urlset/master.m3u8"
 },
 {
+  "id": "wonka",
+  "title": "Wonka",
+  "year": 2023,
+  "duration": 6960,
+  "poster": "https://cdn.kinocheck.com/i/w=1200/k2w3pkttws.jpg",
+  "streamUrl": "https://hfs284.serversicuro.cc/hls/,dnzpflf62tg6qogyvc2h5pzjslqpzhipgcgr2gcev33dtw7szyyhn65axe2q,.urlset/master.m3u8"
+},
+{
   "id": "don’t_move",
   "title": "Don’t Move",
   "year": 2024,
@@ -18,12 +26,28 @@
   "streamUrl": "https://hfs289.serversicuro.cc/hls/,dnzpesee5lg6qogyvacx5lrhykorlmj257jcowwwftkshe5dg6xsmhrupwyq,.urlset/master.m3u8"
 },
 {
+  "id": "bad_boys:_ride_or_die",
+  "title": "Bad Boys: Ride or Die",
+  "year": 2024,
+  "duration": 6900,
+  "poster": "https://de.web.img3.acsta.net/img/41/dc/41dcd003a28d4e2abc8d2fb26d3c084c.jpg",
+  "streamUrl": "https://hfs289.serversicuro.cc/hls/,dnzpdfhl5dg6qogyvbrh5lros3dr6f6wnvy4hb6rpxcb2rd3etrkwyjl7ixq,.urlset/master.m3u8"
+},
+{
   "id": "hereditary:_das_vermächtnis",
   "title": "Hereditary: Das Vermächtnis",
   "year": 2018,
   "duration": 7620,
   "poster": "https://cdn.kinocheck.com/i/j5pmxin84j.jpg",
   "streamUrl": "https://hfs271.serversicuro.cc/hls/,dnzpfpph3hg6qogyvajx7pjcy47bhrno4n3u2brgdvogprqktnvy4z35vo6a,.urlset/master.m3u8"
+},
+{
+  "id": "if:_imaginäre_freunde",
+  "title": "IF: Imaginäre Freunde",
+  "year": 2024,
+  "duration": 6480,
+  "poster": "https://cdn.kinocheck.com/i/w=1200/3hn0ck7aem.jpg",
+  "streamUrl": "https://hfs286.serversicuro.cc/hls/,dnzpeduc27g6qogyvbnh53bkzklhhxrnbipfwgjqa6kpz2tr2bj7sxrmksfa,.urlset/master.m3u8"
 },
 {
   "id": "annabelle_3",
@@ -40,6 +64,14 @@
   "duration": 7140,
   "poster": "https://cdn.kinocheck.com/i/2o5gr8y3el.jpg",
   "streamUrl": "https://hfs289.serversicuro.cc/hls/,dnzpdp6p5lg6qogyvadh5ilstsvmwy75ebfco5d2uuavv525wjkt34crrj2q,.urlset/master.m3u8"
+},
+{
+  "id": "garfield_–_eine_extra_portion_abenteuer",
+  "title": "Garfield – Eine extra Portion Abenteuer",
+  "year": 2024,
+  "duration": 6060,
+  "poster": "https://cdn.kinocheck.com/i/w=1200/adjtsvhjsm.jpg",
+  "streamUrl": "https://hfs286.serversicuro.cc/hls/,dnzpf6zo27g6qogyvbth52luq37ckcgghqnghnws47cien2xvhelbweuwqdq,.urlset/master.m3u8"
 },
 {
   "id": "Chantal im Märchenland",
