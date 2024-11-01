@@ -2,6 +2,14 @@
   "version": "1.25.5",
   "films": [
 {
+  "id": "spieleabend",
+  "title": "Spieleabend",
+  "year": 2024,
+  "duration": 5520,
+  "poster": "https://cdn.kinocheck.com/i/v1kskpwfkr.jpg",
+  "streamUrl": "https://hfs260.serversicuro.cc/hls/,dnzpf4iz27g6qogyvbsh5itxqsxxxvapos2gjymtehjvsfejnopnymtpdjta,.urlset/master.m3u8"
+},
+{
   "id": "the_exorcism",
   "title": "The Exorcism",
   "year": 2024,
