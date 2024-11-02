@@ -5,14 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>FilmFrei</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/dplayer/1.27.1/DPlayer.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary-color: #e50914;
-            --background-color: #141414;
-            --text-color: #ffffff;
-            --card-background: rgba(255, 255, 255, 0.1);
+            --primary-color: #6366f1;
+            --primary-hover: #4f46e5;
+            --background-color: #0f172a;
+            --surface-color: #1e293b;
+            --text-color: #f8fafc;
+            --text-secondary: #94a3b8;
+            --card-background: rgba(30, 41, 59, 0.8);
+            --hover-color: rgba(99, 102, 241, 0.1);
+            --border-radius: 12px;
         }
         
         * {
@@ -21,225 +26,326 @@
             padding: 0;
         }
         
-        html {
-            -webkit-text-size-adjust: 100%;
-        }
-        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: var(--background-color);
+            background-image: 
+                radial-gradient(at 40% 20%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
+                radial-gradient(at 80% 0%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
+                radial-gradient(at 0% 50%, rgba(99, 102, 241, 0.1) 0px, transparent 50%);
             color: var(--text-color);
             line-height: 1.6;
-        }
-        
-        /* Stil für den Server-Hinweis */
-        .server-notice {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            z-index: 3000;
-            max-width: 90%;
-            width: 400px;
-            text-align: center;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            border: 1px solid var(--primary-color);
-            display: none;
-        }
-
-        .server-notice h2 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-            font-size: 1.5em;
-        }
-
-        .server-notice p {
-            margin-bottom: 20px;
-            color: #fff;
-            font-size: 1.1em;
-        }
-
-        .server-notice button {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s;
-        }
-
-        .server-notice button:hover {
-            background: #ff0a16;
-        }
-
-        .backdrop {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 2999;
-            backdrop-filter: blur(5px);
-            display: none;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
+            min-height: 100vh;
         }
         
         header {
-            background-color: rgba(20, 20, 20, 0.8);
-            position: sticky;
+            background-color: rgba(15, 23, 42, 0.8);
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
         }
         
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
-            max-width: 1200px;
+            padding: 1rem 2rem;
+            max-width: 1400px;
             margin: 0 auto;
+            gap: 2rem;
         }
         
         .logo {
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 1.5rem;
+            font-weight: 700;
             color: var(--primary-color);
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo i {
+            font-size: 1.25rem;
         }
         
         #searchBar {
             flex-grow: 1;
-            margin: 0 20px;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 20px;
-            background-color: rgba(255,255,255,0.2);
+            max-width: 600px;
+            padding: 0.75rem 1.25rem;
+            border: 2px solid rgba(99, 102, 241, 0.2);
+            border-radius: var(--border-radius);
+            background-color: rgba(30, 41, 59, 0.5);
             color: var(--text-color);
-            font-size: 16px;
-            transition: background-color 0.3s ease;
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
         
         #searchBar:focus {
             outline: none;
-            background-color: rgba(255,255,255,0.3);
+            border-color: var(--primary-color);
+            background-color: rgba(30, 41, 59, 0.8);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 6rem auto 2rem;
+            padding: 0 2rem;
         }
         
         .film-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-            padding-top: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
         }
         
         .film-card {
             background-color: var(--card-background);
-            border-radius: 8px;
+            border-radius: var(--border-radius);
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(99, 102, 241, 0.1);
+            position: relative;
         }
         
         .film-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary-color);
         }
         
         .film-card img {
             width: 100%;
-            height: auto;
+            height: 330px;
+            object-fit: cover;
             display: block;
+            transition: transform 0.3s ease;
+        }
+        
+        .film-card:hover img {
+            transform: scale(1.05);
         }
         
         .film-info {
-            padding: 15px;
+            padding: 1.25rem;
+            background: linear-gradient(0deg, var(--card-background) 0%, rgba(30, 41, 59, 0.9) 100%);
         }
         
         .film-title {
-            font-size: 18px;
-            margin-bottom: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
         }
         
-        .film-year {
-            font-size: 14px;
-            color: rgba(255,255,255,0.7);
+        .film-meta {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
-        #player {
+        .film-duration {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        #videoPlayer {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #000;
+            background: rgba(15, 23, 42, 0.98);
             z-index: 2000;
             display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
-        .dplayer {
-            width: 100% !important;
-            height: 100% !important;
+        #videoPlayer.active {
+            display: block;
+            opacity: 1;
+        }
+        
+        #mainVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .custom-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(15, 23, 42, 0.9));
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        #videoPlayer:hover .custom-controls {
+            opacity: 1;
+        }
+        
+        .control-button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.25rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+        
+        .control-button:hover {
+            background-color: rgba(99, 102, 241, 0.2);
+            color: var(--primary-color);
         }
         
         #closePlayer {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(15, 23, 42, 0.7);
             border: none;
-            color: #fff;
-            font-size: 24px;
-            z-index: 2001;
+            color: white;
+            padding: 0.75rem;
             cursor: pointer;
-            padding: 10px;
+            z-index: 2001;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        #closePlayer:hover {
+            background-color: var(--primary-color);
+            transform: scale(1.1);
+        }
+        
+        #progressBar {
+            flex-grow: 1;
+            height: 0.375rem;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            position: relative;
+            border-radius: 0.375rem;
+            overflow: hidden;
+        }
+        
+        #progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: var(--primary-color);
+            border-radius: 0.375rem;
+            transition: width 0.1s linear;
+        }
+        
+        #timestamp {
+            color: var(--text-color);
+            font-size: 0.875rem;
+            min-width: 120px;
+            text-align: center;
+            font-variant-numeric: tabular-nums;
+        }
+        
+        .progress-hover {
+            position: absolute;
+            top: -2rem;
+            transform: translateX(-50%);
+            background: var(--surface-color);
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            display: none;
         }
         
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .logo {
-                margin-bottom: 10px;
+                padding: 1rem;
             }
             
             #searchBar {
-                margin: 10px 0;
+                width: 100%;
+                margin: 1rem 0;
+            }
+            
+            .container {
+                padding: 0 1rem;
+                margin-top: 8rem;
             }
             
             .film-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 1rem;
             }
+            
+            .film-card img {
+                height: 240px;
+            }
+            
+            .custom-controls {
+                padding: 1rem;
+            }
+            
+            #closePlayer {
+                top: 1rem;
+                right: 1rem;
+            }
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--background-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-hover);
         }
     </style>
 </head>
 <body>
-    <!-- Server-Hinweis -->
-    <div class="backdrop" id="backdrop"></div>
-    <div class="server-notice" id="serverNotice">
-        <h2>Server-Wartungsarbeiten</h2>
-        <p>Aufgrund technischer Probleme können Filme derzeit nur auf Desktop-PCs abgespielt werden. Wir arbeiten mit Hochdruck an einer Lösung für mobile Geräte.</p>
-        <p>Wir bitten um Ihr Verständnis.</p>
-        <button onclick="closeNotice()">Verstanden</button>
-    </div>
-
     <header>
         <div class="header-content">
-            <a href="#" class="logo" id="refreshLink">FilmFrei</a>
-            <input type="text" id="searchBar" placeholder="Film suchen...">
+            <a href="#" class="logo" id="refreshLink">
+                <i class="fas fa-film"></i>
+                FilmFrei
+            </a>
+            <input type="text" id="searchBar" placeholder="Finde deinen nächsten Lieblingsfilm...">
         </div>
     </header>
     
@@ -247,117 +353,155 @@
         <div class="film-grid" id="filmGrid"></div>
     </div>
     
-    <div id="player">
-        <button id="closePlayer"><i class="fas fa-times"></i></button>
-        <div id="dplayer"></div>
+    <div id="videoPlayer">
+        <button id="closePlayer">
+            <i class="fas fa-times"></i>
+        </button>
+        <video id="mainVideo">
+            <source src="" type="video/mp4">
+            Ihr Browser unterstützt keine HTML5-Videos.
+        </video>
+        <div class="custom-controls">
+            <button class="control-button" id="playPauseBtn">
+                <i class="fas fa-play"></i>
+            </button>
+            <div id="progressBar">
+                <div id="progress"></div>
+                <div class="progress-hover"></div>
+            </div>
+            <span id="timestamp">0:00 / 0:00</span>
+            <button class="control-button" id="fullscreenBtn">
+                <i class="fas fa-expand"></i>
+            </button>
+        </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dplayer/1.27.1/DPlayer.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.4.12/hls.min.js"></script>
     <script>
-        // Globale Variablen
         let catalog = null;
         let currentFilm = null;
-        let player = null;
         const defaultCatalogUrl = 'https://raw.githubusercontent.com/Saulgau/Kdkdkdkdkkdkdkdkxjdvejifvhxudbevdjjxb/refs/heads/main/catalog.ffcat';
-
-        // Server-Hinweis beim Start anzeigen
-        function showServerNotice() {
-            document.getElementById('backdrop').style.display = 'block';
-            document.getElementById('serverNotice').style.display = 'block';
-        }
-
-        function closeNotice() {
-            document.getElementById('backdrop').style.display = 'none';
-            document.getElementById('serverNotice').style.display = 'none';
-        }
-
-        // Warten bis das DOM vollständig geladen ist
-        document.addEventListener('DOMContentLoaded', function() {
-            // Server-Hinweis anzeigen
-            showServerNotice();
-            
-            // Event Listener Setup
-            setupEventListeners();
-            // Katalog laden
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            setupPlayer();
             loadCatalog(defaultCatalogUrl);
+            
+            document.getElementById('refreshLink').addEventListener('click', (e) => {
+                e.preventDefault();
+                loadCatalog(defaultCatalogUrl);
+            });
+            
+            document.getElementById('searchBar').addEventListener('input', searchFilms);
         });
-
-        function setupEventListeners() {
-            const closePlayerBtn = document.getElementById('closePlayer');
-            if (closePlayerBtn) {
-                closePlayerBtn.addEventListener('click', () => {
-                    const playerContainer = document.getElementById('player');
+      function setupPlayer() {
+            const video = document.getElementById('mainVideo');
+            const playerContainer = document.getElementById('videoPlayer');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const progressBar = document.getElementById('progressBar');
+            const progress = document.getElementById('progress');
+            const timestamp = document.getElementById('timestamp');
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const closeBtn = document.getElementById('closePlayer');
+            
+            // Event Listener für Video-Steuerung
+            playPauseBtn.addEventListener('click', togglePlay);
+            video.addEventListener('click', togglePlay);
+            video.addEventListener('play', updatePlayButton);
+            video.addEventListener('pause', updatePlayButton);
+            video.addEventListener('timeupdate', updateProgress);
+            video.addEventListener('loadedmetadata', updateProgress);
+            
+            // Event Listener für Progress Bar
+            progressBar.addEventListener('click', seek);
+            progressBar.addEventListener('mousemove', showProgressHover);
+            progressBar.addEventListener('mouseleave', hideProgressHover);
+            
+            // Event Listener für Vollbild und Schließen
+            fullscreenBtn.addEventListener('click', toggleFullscreen);
+            closeBtn.addEventListener('click', closePlayer);
+            
+            // Speichere Position alle 5 Sekunden
+            setInterval(() => {
+                if (currentFilm && !video.paused) {
+                    localStorage.setItem(`filmProgress_${currentFilm.id}`, video.currentTime);
+                }
+            }, 5000);
+            
+            function togglePlay() {
+                if (video.paused) video.play();
+                else video.pause();
+            }
+            
+            function updatePlayButton() {
+                playPauseBtn.innerHTML = `<i class="fas fa-${video.paused ? 'play' : 'pause'}"></i>`;
+            }
+            
+            function formatTime(seconds) {
+                const hours = Math.floor(seconds / 3600);
+                const minutes = Math.floor((seconds % 3600) / 60);
+                seconds = Math.floor(seconds % 60);
+                
+                if (hours > 0) {
+                    return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }
+                return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            }
+            
+            function updateProgress() {
+                if (!video.duration) return;
+                const percent = (video.currentTime / video.duration) * 100;
+                progress.style.width = `${percent}%`;
+                timestamp.textContent = `${formatTime(video.currentTime)} / ${formatTime(video.duration)}`;
+            }
+            
+            function showProgressHover(e) {
+                if (!video.duration) return;
+                const progressHover = progressBar.querySelector('.progress-hover');
+                const percent = (e.offsetX / progressBar.offsetWidth);
+                const time = percent * video.duration;
+                
+                progressHover.style.display = 'block';
+                progressHover.style.left = `${e.offsetX}px`;
+                progressHover.textContent = formatTime(time);
+            }
+            
+            function hideProgressHover() {
+                const progressHover = progressBar.querySelector('.progress-hover');
+                progressHover.style.display = 'none';
+            }
+            
+            function seek(e) {
+                if (!video.duration) return;
+                const percent = (e.offsetX / progressBar.offsetWidth);
+                video.currentTime = percent * video.duration;
+            }
+            
+            function toggleFullscreen() {
+                if (!document.fullscreenElement) {
+                    playerContainer.requestFullscreen();
+                    fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
+                } else {
+                    document.exitFullscreen();
+                    fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
+                }
+            }
+            
+            function closePlayer() {
+                playerContainer.classList.remove('active');
+                video.pause();
+                // Speichere Position bevor Player geschlossen wird
+                if (currentFilm) {
+                    localStorage.setItem(`filmProgress_${currentFilm.id}`, video.currentTime);
+                }
+                setTimeout(() => {
                     playerContainer.style.display = 'none';
-                    if (player) {
-                        player.destroy();
-                        player = null;
-                    }
-                    currentFilm = null;
-                });
+                }, 300);
             }
-
-            const searchBar = document.getElementById('searchBar');
-            if (searchBar) {
-                searchBar.addEventListener('input', searchFilms);
-            }
-
-            const refreshLink = document.getElementById('refreshLink');
-            if (refreshLink) {
-                refreshLink.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    loadCatalog(defaultCatalogUrl);
-                });
-            }
-
-            document.addEventListener("visibilitychange", function() {
-                if (!document.hidden) {
-                    window.location.reload();
-                }
-            });
-        }
-
-        function initPlayer(url) {
-            if (player) {
-                player.destroy();
-            }
-
-            const dp = new DPlayer({
-                container: document.getElementById('dplayer'),
-                screenshot: true,
-                video: {
-                    url: url,
-                    type: 'auto'
-                },
-                autoplay: true
-            });
-
-            player = dp;
-
-            if (currentFilm) {
-                const savedTime = localStorage.getItem(`filmProgress_${currentFilm.id}`);
-                if (savedTime) {
-                    dp.seek(parseFloat(savedTime));
-                }
-
-                dp.on('timeupdate', () => {
-                    localStorage.setItem(`filmProgress_${currentFilm.id}`, dp.video.currentTime);
-                });
-            }
-
-            return dp;
-        }
-
-        function playFilm(film) {
-            currentFilm = film;
-            const playerContainer = document.getElementById('player');
-            playerContainer.style.display = 'block';
-            initPlayer(film.streamUrl);
         }
 
         async function loadCatalog(url) {
             try {
                 const response = await fetch(url);
+                if (!response.ok) throw new Error('Netzwerk-Antwort war nicht ok');
                 catalog = await response.json();
                 renderFilms(catalog.films);
             } catch (error) {
@@ -369,14 +513,30 @@
         function renderFilms(films) {
             const filmGrid = document.getElementById('filmGrid');
             filmGrid.innerHTML = '';
+            
             films.forEach(film => {
                 const card = document.createElement('div');
                 card.className = 'film-card';
+                
+                // Konvertiere die Dauer von Sekunden in Stunden und Minuten
+                const duration = film.duration || 0;
+                const hours = Math.floor(duration / 3600);
+                const minutes = Math.floor((duration % 3600) / 60);
+                const durationText = hours > 0 ? 
+                    `${hours}Std ${minutes}Min` : 
+                    `${minutes}Min`;
+                
                 card.innerHTML = `
                     <img src="${film.poster}" alt="${film.title}" loading="lazy">
                     <div class="film-info">
                         <h3 class="film-title">${film.title}</h3>
-                        <p class="film-year">${film.year || 'Unbekanntes Jahr'}</p>
+                        <div class="film-meta">
+                            <span class="film-year">${film.year || 'Unbekanntes Jahr'}</span>
+                            <span class="film-duration">
+                                <i class="far fa-clock"></i>
+                                ${durationText}
+                            </span>
+                        </div>
                     </div>
                 `;
                 card.addEventListener('click', () => playFilm(film));
@@ -384,13 +544,39 @@
             });
         }
 
+        function playFilm(film) {
+            currentFilm = film;
+            const video = document.getElementById('mainVideo');
+            const player = document.getElementById('videoPlayer');
+            
+            // Video Source setzen
+            video.querySelector('source').src = film.streamUrl;
+            video.load();
+            
+            // Player anzeigen
+            player.style.display = 'block';
+            requestAnimationFrame(() => {
+                player.classList.add('active');
+            });
+            
+            // Lade gespeicherte Position
+            const savedTime = localStorage.getItem(`filmProgress_${film.id}`);
+            if (savedTime) {
+                video.currentTime = parseFloat(savedTime);
+            }
+            
+            video.play();
+        }
+
         function searchFilms() {
+            if (!catalog) return;
+            
             const searchTerm = document.getElementById('searchBar').value.toLowerCase();
             const filteredFilms = catalog.films.filter(film => 
                 film.title.toLowerCase().includes(searchTerm)
             );
             renderFilms(filteredFilms);
         }
-    </script>
+</script>
 </body>
 </html>
