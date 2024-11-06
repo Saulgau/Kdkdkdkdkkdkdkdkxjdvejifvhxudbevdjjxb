@@ -2,13 +2,10 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="FilmFrei - Deine Streaming-Plattform">
-    <meta name="theme-color" content="#0f172a">
-    <title>FilmFrei Pro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FilmFrei - Dienst eingestellt</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
     <style>
         :root {
             --primary-color: #6366f1;
@@ -17,270 +14,154 @@
             --surface-color: #1e293b;
             --text-color: #f8fafc;
             --text-secondary: #94a3b8;
-            --card-background: rgba(30, 41, 59, 0.8);
-            --hover-color: rgba(99, 102, 241, 0.1);
-            --border-radius: 12px;
+            --error-color: #ef4444;
         }
         
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: var(--background-color);
             background-image: 
                 radial-gradient(at 40% 20%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
                 radial-gradient(at 80% 0%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
                 radial-gradient(at 0% 50%, rgba(99, 102, 241, 0.1) 0px, transparent 50%);
             color: var(--text-color);
-            line-height: 1.6;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             min-height: 100vh;
-        }
-        
-        header {
-            background-color: rgba(15, 23, 42, 0.95);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
-        }
-        
-        .header-content {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-            padding: 1rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-            gap: 2rem;
+            justify-content: center;
+            padding: 1.5rem;
+            line-height: 1.6;
         }
         
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .logo i {
-            font-size: 1.25rem;
-        }
-        
-        #searchBar {
-            flex-grow: 1;
+        .message-container {
             max-width: 600px;
-            padding: 0.75rem 1.25rem;
-            border: 2px solid rgba(99, 102, 241, 0.2);
-            border-radius: var(--border-radius);
-            background-color: rgba(30, 41, 59, 0.5);
-            color: var(--text-color);
-            font-size: 1rem;
-        }
-        
-        #searchBar:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            background-color: rgba(30, 41, 59, 0.8);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-        }
-        
-        .container {
-            max-width: 1400px;
-            margin: 6rem auto 2rem;
-            padding: 0 2rem;
-        }
-        
-        .film-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .film-card {
-            background-color: var(--card-background);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            transition: transform 0.3s ease;
-            border: 1px solid rgba(99, 102, 241, 0.1);
-            position: relative;
-            cursor: pointer;
-            text-decoration: none;
-            color: inherit;
-        }
-        
-        .film-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border-color: var(--primary-color);
-        }
-        
-        .film-card img {
             width: 100%;
-            height: 330px;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.3s ease;
-        }
-        
-        .film-card:hover img {
-            transform: scale(1.05);
-        }
-        
-        .film-info {
-            padding: 1.25rem;
-            background: linear-gradient(0deg, var(--card-background) 0%, rgba(30, 41, 59, 0.9) 100%);
-        }
-        
-        .film-title {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-color);
-        }
-        
-        .film-meta {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .film-duration {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            background-color: rgba(30, 41, 59, 0.8);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            animation: fadeIn 0.5s ease;
         }
 
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                padding: 1rem;
-            }
-            
-            #searchBar {
-                width: 100%;
-                margin: 1rem 0;
-            }
-            
-            .container {
-                padding: 0 1rem;
-                margin-top: 8rem;
-            }
-            
-            .film-grid {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-                gap: 1rem;
-            }
-            
-            .film-card img {
-                height: 240px;
-            }
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo i {
+            font-size: 1.75rem;
+        }
+
+        .title {
+            color: var(--error-color);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+        }
+
+        .message {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .signature {
+            color: var(--text-secondary);
+            text-align: right;
+            font-style: italic;
+            margin-top: 2rem;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(
+                90deg, 
+                transparent, 
+                rgba(99, 102, 241, 0.2), 
+                transparent
+            );
+            margin: 2rem 0;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        
-        .film-card {
-            animation: fadeIn 0.3s ease backwards;
+
+        @media (max-width: 480px) {
+            .message-container {
+                padding: 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.75rem;
+            }
+
+            .logo i {
+                font-size: 1.5rem;
+            }
+
+            .title {
+                font-size: 1.25rem;
+            }
+
+            .message {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <a href="#" class="logo" id="refreshLink">
-                <i class="fas fa-film"></i>
-                FilmFrei
-            </a>
-            <input type="text" id="searchBar" placeholder="Finde deinen nächsten Lieblingsfilm...">
+    <div class="message-container">
+        <div class="logo">
+            <i class="fas fa-film"></i>
+            FilmFrei
         </div>
-    </header>
-    
-    <main class="container">
-        <div class="film-grid" id="filmGrid"></div>
-    </main>
 
-    <script>
-        let catalog = null;
-        const defaultCatalogUrl = 'https://raw.githubusercontent.com/Saulgau/Kdkdkdkdkkdkdkdkxjdvejifvhxudbevdjjxb/refs/heads/main/catalog.ffcat';
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            loadCatalog(defaultCatalogUrl);
-            
-            document.getElementById('refreshLink').addEventListener('click', (e) => {
-                e.preventDefault();
-                loadCatalog(defaultCatalogUrl);
-            });
-            
-            document.getElementById('searchBar').addEventListener('input', searchFilms);
-        });
+        <h1 class="title">
+            <i class="fas fa-server"></i>
+            Server abgeschaltet
+        </h1>
 
-        async function loadCatalog(url) {
-            try {
-                const response = await fetch(url);
-                catalog = await response.json();
-                renderFilms(catalog.films);
-            } catch (error) {
-                console.error('Fehler beim Laden des Katalogs:', error);
-                alert('Fehler beim Laden des Katalogs. Bitte versuchen Sie es später erneut.');
-            }
-        }
+        <p class="message">
+            Liebe Nutzerinnen und Nutzer,<br><br>
+            wir müssen euch leider mitteilen, dass alle Server von FilmFrei abgeschaltet wurden. Der Dienst wird mit sofortiger Wirkung eingestellt und nicht wieder aufgenommen.
+        </p>
 
-        function renderFilms(films) {
-            const filmGrid = document.getElementById('filmGrid');
-            filmGrid.innerHTML = '';
-            
-            films.forEach(film => {
-                const card = document.createElement('a');
-                card.className = 'film-card';
-                card.href = `player.html?id=${film.id}`;
-                card.target = '_blank';
-                
-                const duration = film.duration || 0;
-                const hours = Math.floor(duration / 3600);
-                const minutes = Math.floor((duration % 3600) / 60);
-                const durationText = hours > 0 ? 
-                    `${hours}Std ${minutes}Min` : 
-                    `${minutes}Min`;
-                
-                card.innerHTML = `
-                    <img src="${film.poster}" alt="${film.title}" loading="lazy">
-                    <div class="film-info">
-                        <h3 class="film-title">${film.title}</h3>
-                        <div class="film-meta">
-                            <span class="film-year">${film.year || 'Unbekanntes Jahr'}</span>
-                            <span class="film-duration">
-                                <i class="far fa-clock"></i>
-                                ${durationText}
-                            </span>
-                        </div>
-                    </div>
-                `;
-                filmGrid.appendChild(card);
-            });
-        }
+        <div class="divider"></div>
 
-        function searchFilms() {
-            if (!catalog) return;
-            
-            const searchTerm = document.getElementById('searchBar').value.toLowerCase();
-            const filteredFilms = catalog.films.filter(film => 
-                film.title.toLowerCase().includes(searchTerm)
-            );
-            renderFilms(filteredFilms);
-        }
-    </script>
+        <p class="signature">
+            Euer FilmFrei Team
+        </p>
+    </div>
 </body>
 </html>
